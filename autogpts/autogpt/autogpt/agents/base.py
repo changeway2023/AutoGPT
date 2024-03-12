@@ -43,6 +43,8 @@ from autogpt.llm.providers.openai import get_openai_command_specs
 from autogpt.models.action_history import ActionResult, EpisodicActionHistory
 from autogpt.prompts.prompt import DEFAULT_TRIGGERING_PROMPT
 
+from .utils.agent_file_manager import AgentFileManager
+
 logger = logging.getLogger(__name__)
 
 CommandName = str
