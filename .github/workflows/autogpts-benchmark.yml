@@ -1,10 +1,9 @@
 name: AutoGPTs Nightly Benchmark
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 2 1 1,4,7,10 *' # 每三个月执行一次，在1月、4月、7月和10月的第一天凌晨2点
-    # - cron: '0 2 * * *'
+#on:
+#  workflow_dispatch:
+#  schedule:
+#     - cron: '0 2 * * *'
     
 
 jobs:
