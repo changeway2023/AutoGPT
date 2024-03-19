@@ -152,6 +152,7 @@ class BaseAgent(Configurable[BaseAgentSettings], ABC):
 
     default_settings = BaseAgentSettings(
         name="BaseAgent",
+        # 文档字符串，位置指向：类声明 下面的第一行
         description=__doc__,
     )
 
@@ -164,6 +165,7 @@ class BaseAgent(Configurable[BaseAgentSettings], ABC):
         file_storage: FileStorage,
         legacy_config: Config,
     ):
+        # 初始化配置信息
         self.state = settings
         self.config = settings.config
         self.ai_profile = settings.ai_profile
@@ -187,16 +189,19 @@ class BaseAgent(Configurable[BaseAgentSettings], ABC):
 
         logger.debug(f"Created {__class__} '{self.ai_profile.ai_name}'")
 
+
     @property
-    def llm(self) -> ChatModelInfo:
+    def llm(self) -> ChatModelInfo: # 声明一个函数，函数的入参是self，出参是ChatModelInfo
         """The LLM that the agent uses to think."""
         llm_name = (
+            # 三元运算符，判断条件是：self.config.big_brain 这个配置项
             self.config.smart_llm if self.config.big_brain else self.config.fast_llm
         )
         return OPEN_AI_CHAT_MODELS[llm_name]
 
     @property
-    def send_token_limit(self) -> int:
+    def send_token_limit(self) -> int: # 限制模型生成的文本长度
+        # 这里暗含：如果前值非空，则取前值；如果前值为空，则取后值。
         return self.config.send_token_limit or self.llm.max_tokens * 3 // 4
 
     async def propose_action(self) -> ThoughtProcessOutput:

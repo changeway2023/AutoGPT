@@ -77,7 +77,10 @@ class OpenAIModelName(str, enum.Enum):
 
 
 OPEN_AI_EMBEDDING_MODELS = {
+    # 声明了字典的结构：key是info.name, value是info
     info.name: info
+    # 字典推导式，从一个序列或其他可迭代对象创建新的字典；
+    # 具体到这个case，这个可迭代对象是一串数组，遍历这个数组对象，然后映射到字典结构中
     for info in [
         EmbeddingModelInfo(
             name=OpenAIModelName.EMBEDDING_v2,
